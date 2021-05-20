@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveTrainConstants.*;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -59,17 +60,19 @@ public class DriveTrain extends SubsystemBase {
     motorLSlave1.follow(motorLMaster);
     motorLSlave2.follow(motorLMaster);
     motorRSlave1.follow(motorRMaster);
-    motorRSlave2.follow(motorLMaster);
+    motorRSlave2.follow(motorRMaster);
 
     // makes one side of the robot reverse direction in order to ensure that the robot goes forward when the joysticks are both forward and backwards when the joysticks are both backwards
-    motorLMaster.setInverted(false);
+    motorLMaster.setInverted(TalonFXInvertType.CounterClockwise);
     motorLSlave1.setInverted(TalonFXInvertType.FollowMaster);
     motorLSlave2.setInverted(TalonFXInvertType.FollowMaster);
-    motorRMaster.setInverted(true);
+    motorRMaster.setInverted(TalonFXInvertType.Clockwise);
     motorRSlave1.setInverted(TalonFXInvertType.FollowMaster);
     motorRSlave2.setInverted(TalonFXInvertType.FollowMaster);
 
     //m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+
+    resetEncPos(); //Reset Encoders r navX yaw before m_odometry is defined
 
     leftGroup = new SpeedControllerGroup( motorLMaster , motorLSlave1, motorLSlave2 );
     rightGroup = new SpeedControllerGroup( motorRMaster , motorRSlave1, motorRSlave2 );
@@ -102,6 +105,28 @@ public class DriveTrain extends SubsystemBase {
   public void driveL (double Lmotor) {
     motorLMaster.set( Lmotor );
   }
+
+  // public Pose2d getPose() {
+  //   return m_odometry.getPoseMeters();
+  // }
+
+  public void brakeMode() {
+    motorLMaster.setNeutralMode(NeutralMode.Brake);
+    motorLSlave1.setNeutralMode(NeutralMode.Brake);
+    motorLSlave2.setNeutralMode(NeutralMode.Brake);
+    motorRMaster.setNeutralMode(NeutralMode.Brake);
+    motorRSlave1.setNeutralMode(NeutralMode.Brake);
+    motorRSlave2.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coastMode() {
+    motorLMaster.setNeutralMode(NeutralMode.Coast);
+    motorLSlave1.setNeutralMode(NeutralMode.Coast);
+    motorLSlave2.setNeutralMode(NeutralMode.Coast);
+    motorRMaster.setNeutralMode(NeutralMode.Coast);
+    motorRSlave1.setNeutralMode(NeutralMode.Coast);
+    motorRSlave2.setNeutralMode(NeutralMode.Coast);
+  }
+
 
   @Override
   public void periodic() {
