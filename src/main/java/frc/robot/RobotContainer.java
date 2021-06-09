@@ -10,6 +10,19 @@ import edu.wpi.first.wpilibj.XboxController;
 //import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
+//import frc.robot.Constants.OIConstants;
+import frc.robot.commands.*;
+// import frc.robot.commands.autoCommands.*;
+import frc.robot.subsystems.*;
+
+// import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+// import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+
+// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -17,6 +30,9 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private final DriveTrain drivetrain = new DriveTrain();
+
+  private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive(drivetrain);
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -24,6 +40,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    drivetrain.setDefaultCommand(xboxArcadeDrive);
     // Configure the button bindings
     configureButtonBindings();
   }

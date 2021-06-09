@@ -21,4 +21,10 @@ public final class Constants {
         public static final int motorRSlave1ID = 5;
         public static final int motorRSlave2ID = 6;
     }
+
+    public static final class OIConstants {
+        public static final int contPort = 0; // port of xbox controller connected
+        public static final int driverContPort = 1; 
+        public static final double xboxDeadzone = .125;
+    }
 }
