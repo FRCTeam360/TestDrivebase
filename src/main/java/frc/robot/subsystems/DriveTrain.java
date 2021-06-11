@@ -127,6 +127,13 @@ public class DriveTrain extends SubsystemBase {
     motorRSlave2.setNeutralMode(NeutralMode.Coast);
   }
 
+  public double getHighestVelocity () { 
+    double leftSpeed = motorLMaster.TalonFXSensorCollection.getIntegratedSensorVelocity() * AutoConstants.ticksToMeters;
+    double rightSpeed = motorRMaster.getEncoder().getVelocity() * AutoConstants.ticksToMeters;
+    double highSpeed = Math.max( Math.abs(leftSpeed), Math.abs(rightSpeed) ); //Make em both positive
+    return highSpeed; //In meters per second
+  }
+
 
   @Override
   public void periodic() {

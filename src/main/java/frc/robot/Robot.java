@@ -51,7 +51,13 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    if ( m_robotContainer.drivetrain.getHighestVelocity() >= 1.7 ) { //if either side is going more then 10 m/s, about 1/5 of top speed high gear
+      m_robotContainer.drivetrain.brakeMode();
+    } else {
+      m_robotContainer.drivetrain.coastMode();
+    }
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
