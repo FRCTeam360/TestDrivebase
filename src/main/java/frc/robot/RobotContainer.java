@@ -33,6 +33,7 @@ public class RobotContainer {
   public final DriveTrain drivetrain = new DriveTrain();
 
   private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive(drivetrain);
+  private final XboxTankDrive xboxTankDrive = new XboxTankDrive(drivetrain);
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 

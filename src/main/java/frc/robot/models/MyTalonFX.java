@@ -5,6 +5,7 @@
 package frc.robot.models;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -13,9 +14,16 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class MyTalonFX extends TalonFX implements SpeedController {
     private int defaultPidIndex = 0;
     private double currentSetValue = 0;
+    private TalonFXSensorCollection myTalonFXSensors;
     
     public MyTalonFX(int deviceNumber) {
         super(deviceNumber);
+
+        this.myTalonFXSensors = new TalonFXSensorCollection(this);
+    }
+
+    public double getVelocity() {
+        return myTalonFXSensors.getIntegratedSensorVelocity();
     }
 
     @Override
