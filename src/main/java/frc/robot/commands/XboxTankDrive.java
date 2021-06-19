@@ -36,12 +36,12 @@ public class XboxTankDrive extends CommandBase {
   @Override
   public void execute() {   // Called every time the scheduler runs while the command is scheduled.
     if(Math.abs(driverCont.getY(Hand.kRight)) >= .125){
-    	myDriveTrain.driveR(-1 * driverCont.getY(Hand.kRight) * 0.8);
+    	myDriveTrain.driveR(-1 * driverCont.getY(Hand.kRight) * 1.0);
     }else{
     	myDriveTrain.driveR(0);
     }
     if(Math.abs(driverCont.getY(Hand.kLeft)) >= .125){
-      myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft) * 0.8);
+      myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft) * 1.0);
     }else{
     	myDriveTrain.driveL(0);
     }

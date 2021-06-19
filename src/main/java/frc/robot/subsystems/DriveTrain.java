@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveTrainConstants.*;
+//import frc.robot.Constants.AutoConstants;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -127,12 +128,12 @@ public class DriveTrain extends SubsystemBase {
     motorRSlave2.setNeutralMode(NeutralMode.Coast);
   }
 
-  public double getHighestVelocity () { 
-    double leftSpeed = motorLMaster.TalonFXSensorCollection.getIntegratedSensorVelocity() * AutoConstants.ticksToMeters;
-    double rightSpeed = motorRMaster.getEncoder().getVelocity() * AutoConstants.ticksToMeters;
-    double highSpeed = Math.max( Math.abs(leftSpeed), Math.abs(rightSpeed) ); //Make em both positive
-    return highSpeed; //In meters per second
-  }
+  // public double getHighestVelocity () { 
+  //   double leftSpeed = motorLMaster.TalonFXSensorCollection.getIntegratedSensorVelocity() * AutoConstants.ticksToMeters;
+  //   double rightSpeed = motorRMaster.getEncoder().getVelocity() * AutoConstants.ticksToMeters;
+  //   double highSpeed = Math.max( Math.abs(leftSpeed), Math.abs(rightSpeed) ); //Make em both positive
+  //   return highSpeed; //In meters per second
+  // 5}
 
 
   @Override

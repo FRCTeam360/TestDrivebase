@@ -59,8 +59,8 @@ public class XboxArcadeDrive extends CommandBase {
     driveLeft = Math.max(driveLeft, -1);
     driveRight = Math.max(driveRight, -1);
  
-    myDriveTrain.driveL(driveLeft * 0.8);
-    myDriveTrain.driveR(driveRight * 0.8);
+    myDriveTrain.driveL(driveLeft * 1.0);
+    myDriveTrain.driveR(driveRight * 1.0);
   }
 
   // Called once the command ends or is interrupted.
