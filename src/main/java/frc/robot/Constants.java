@@ -14,12 +14,12 @@ package frc.robot;
  */
 public final class Constants {
     public static final class DriveTrainConstants {
-        public static final int motorLMasterID = 1;
-        public static final int motorLSlave1ID = 2;
-        public static final int motorLSlave2ID = 3;
-        public static final int motorRMasterID = 4;
-        public static final int motorRSlave1ID = 5;
-        public static final int motorRSlave2ID = 6;
+        public static final int motorLLeadID = 1;
+        public static final int motorLFollow1ID = 2;
+        public static final int motorLFollow2ID = 3;
+        public static final int motorRLeadID = 4;
+        public static final int motorRFollow1ID = 5;
+        public static final int motorRFollow2ID = 6;
     }
 
     public static final class OIConstants {

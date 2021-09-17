@@ -23,12 +23,12 @@ import frc.robot.models.MyTalonFX;
 
 public class DriveTrain extends SubsystemBase {
   
-  private static MyTalonFX motorLMaster;
-  private static MyTalonFX motorLSlave1;
-  private static MyTalonFX motorLSlave2;
-  private static MyTalonFX motorRMaster;
-  private static MyTalonFX motorRSlave1;
-  private static MyTalonFX motorRSlave2;
+  private static MyTalonFX motorLLead;
+  private static MyTalonFX motorLFollow1;
+  private static MyTalonFX motorLFollow2;
+  private static MyTalonFX motorRLead;
+  private static MyTalonFX motorRFollow1;
+  private static MyTalonFX motorRFollow2;
 
   private final DifferentialDrive m_differentialDrive;
 
@@ -43,40 +43,40 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
-    motorLMaster = new MyTalonFX(motorLMasterID);
-    motorLSlave1 = new MyTalonFX(motorLSlave1ID);
-    motorLSlave2 = new MyTalonFX(motorLSlave2ID);
-    motorRMaster = new MyTalonFX(motorRMasterID);
-    motorRSlave1 = new MyTalonFX(motorRSlave1ID);
-    motorRSlave2 = new MyTalonFX(motorRSlave2ID);
+    motorLLead = new MyTalonFX(motorLLeadID);
+    motorLFollow1 = new MyTalonFX(motorLFollow1ID);
+    motorLFollow2 = new MyTalonFX(motorLFollow2ID);
+    motorRLead = new MyTalonFX(motorRLeadID);
+    motorRFollow1 = new MyTalonFX(motorRFollow1ID);
+    motorRFollow2 = new MyTalonFX(motorRFollow2ID);
 
-    motorLMaster.configFactoryDefault();
-    motorLSlave1.configFactoryDefault();
-    motorLSlave2.configFactoryDefault();
-    motorRMaster.configFactoryDefault();
-    motorRSlave1.configFactoryDefault();
-    motorRSlave2.configFactoryDefault(); 
+    motorLLead.configFactoryDefault();
+    motorLFollow1.configFactoryDefault();
+    motorLFollow2.configFactoryDefault();
+    motorRLead.configFactoryDefault();
+    motorRFollow1.configFactoryDefault();
+    motorRFollow2.configFactoryDefault(); 
 
     // makes the second motor for left and right sides to follow the primary motor on the left and right
-    motorLSlave1.follow(motorLMaster);
-    motorLSlave2.follow(motorLMaster);
-    motorRSlave1.follow(motorRMaster);
-    motorRSlave2.follow(motorRMaster);
+    motorLFollow1.follow(motorLLead);
+    motorLFollow2.follow(motorLLead);
+    motorRFollow1.follow(motorRLead);
+    motorRFollow2.follow(motorRLead);
 
     // makes one side of the robot reverse direction in order to ensure that the robot goes forward when the joysticks are both forward and backwards when the joysticks are both backwards
-    motorLMaster.setInverted(TalonFXInvertType.CounterClockwise);
-    motorLSlave1.setInverted(TalonFXInvertType.FollowMaster);
-    motorLSlave2.setInverted(TalonFXInvertType.FollowMaster);
-    motorRMaster.setInverted(TalonFXInvertType.Clockwise);
-    motorRSlave1.setInverted(TalonFXInvertType.FollowMaster);
-    motorRSlave2.setInverted(TalonFXInvertType.FollowMaster);
+    motorLLead.setInverted(TalonFXInvertType.CounterClockwise);
+    motorLFollow1.setInverted(TalonFXInvertType.FollowMaster);
+    motorLFollow2.setInverted(TalonFXInvertType.FollowMaster);
+    motorRLead.setInverted(TalonFXInvertType.Clockwise);
+    motorRFollow1.setInverted(TalonFXInvertType.FollowMaster);
+    motorRFollow2.setInverted(TalonFXInvertType.FollowMaster);
 
     //m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
     resetEncPos(); //Reset Encoders r navX yaw before m_odometry is defined
 
-    leftGroup = new SpeedControllerGroup( motorLMaster , motorLSlave1, motorLSlave2 );
-    rightGroup = new SpeedControllerGroup( motorRMaster , motorRSlave1, motorRSlave2 );
+    leftGroup = new SpeedControllerGroup( motorLLead , motorLFollow1, motorLFollow2 );
+    rightGroup = new SpeedControllerGroup( motorRLead , motorRFollow1, motorRFollow2 );
 
     m_differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
     m_differentialDrive.setSafetyEnabled(false); //So it won't stop the motors from moving
@@ -89,8 +89,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void resetEncPos () { //For initialization resets encoder positions, for ramsete
-    motorLMaster.setSelectedSensorPosition(0);
-    motorRMaster.setSelectedSensorPosition(0);
+    motorLLead.setSelectedSensorPosition(0);
+    motorRLead.setSelectedSensorPosition(0);
     // navX.zeroYaw();
     // navX.setAngleAdjustment( -navX.getAngle() ); //Set angle offset
     // m_odometry.resetPosition(new Pose2d(), Rotation2d.fromDegrees(getHeading())); //Set odomentry to zero
@@ -101,10 +101,10 @@ public class DriveTrain extends SubsystemBase {
   // }
 
   public void driveR (double Rmotor) {
-    motorRMaster.set( Rmotor );
+    motorRLead.set( Rmotor );
   }
   public void driveL (double Lmotor) {
-    motorLMaster.set( Lmotor );
+    motorLLead.set( Lmotor );
   }
 
   // public Pose2d getPose() {
@@ -112,25 +112,25 @@ public class DriveTrain extends SubsystemBase {
   // }
 
   public void brakeMode() {
-    motorLMaster.setNeutralMode(NeutralMode.Brake);
-    motorLSlave1.setNeutralMode(NeutralMode.Brake);
-    motorLSlave2.setNeutralMode(NeutralMode.Brake);
-    motorRMaster.setNeutralMode(NeutralMode.Brake);
-    motorRSlave1.setNeutralMode(NeutralMode.Brake);
-    motorRSlave2.setNeutralMode(NeutralMode.Brake);
+    motorLLead.setNeutralMode(NeutralMode.Brake);
+    motorLFollow1.setNeutralMode(NeutralMode.Brake);
+    motorLFollow2.setNeutralMode(NeutralMode.Brake);
+    motorRLead.setNeutralMode(NeutralMode.Brake);
+    motorRFollow1.setNeutralMode(NeutralMode.Brake);
+    motorRFollow2.setNeutralMode(NeutralMode.Brake);
   }
   public void coastMode() {
-    motorLMaster.setNeutralMode(NeutralMode.Coast);
-    motorLSlave1.setNeutralMode(NeutralMode.Coast);
-    motorLSlave2.setNeutralMode(NeutralMode.Coast);
-    motorRMaster.setNeutralMode(NeutralMode.Coast);
-    motorRSlave1.setNeutralMode(NeutralMode.Coast);
-    motorRSlave2.setNeutralMode(NeutralMode.Coast);
+    motorLLead.setNeutralMode(NeutralMode.Coast);
+    motorLFollow1.setNeutralMode(NeutralMode.Coast);
+    motorLFollow2.setNeutralMode(NeutralMode.Coast);
+    motorRLead.setNeutralMode(NeutralMode.Coast);
+    motorRFollow1.setNeutralMode(NeutralMode.Coast);
+    motorRFollow2.setNeutralMode(NeutralMode.Coast);
   }
 
   // public double getHighestVelocity () { 
-  //   double leftSpeed = motorLMaster.TalonFXSensorCollection.getIntegratedSensorVelocity() * AutoConstants.ticksToMeters;
-  //   double rightSpeed = motorRMaster.getEncoder().getVelocity() * AutoConstants.ticksToMeters;
+  //   double leftSpeed = motorLLead.TalonFXSensorCollection.getIntegratedSensorVelocity() * AutoConstants.ticksToMeters;
+  //   double rightSpeed = motorRLead.getEncoder().getVelocity() * AutoConstants.ticksToMeters;
   //   double highSpeed = Math.max( Math.abs(leftSpeed), Math.abs(rightSpeed) ); //Make em both positive
   //   return highSpeed; //In meters per second
   // 5}
