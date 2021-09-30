@@ -34,16 +34,13 @@ public class ButtonDrive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
-  if(Math.abs(driverCont.getY(Hand.kRight)) >= .125){
-    myDriveTrain.driveR(-1 * driverCont.getY(Hand.kRight) * 1.0);
-  }else{
-    myDriveTrain.driveR(0);
+  public void execute() {
+    if(driverCont.getYButton()){
+      myDriveTrain.driveR(0.2);
+      myDriveTrain.driveR(0.2);
+    }
   }
-  if(Math.abs(driverCont.getY(Hand.kLeft)) >= .125){
-    myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft) * 1.0);
-  }else{
-    myDriveTrain.driveL(0);
+  
 
   // Called once the command ends or is interrupted.
   @Override
