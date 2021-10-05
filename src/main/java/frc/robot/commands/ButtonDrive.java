@@ -37,15 +37,21 @@ public class ButtonDrive extends CommandBase {
   public void execute() {
     if(driverCont.getYButton()){
       myDriveTrain.driveR(0.2);
-      myDriveTrain.driveR(0.2);
+      myDriveTrain.driveL(0.2);
+    }else if(driverCont.getAButton()){
+      myDriveTrain.driveR(-0.2);
+      myDriveTrain.driveL(-0.2);
+    }else{
+      myDriveTrain.driveR(0);
+      myDriveTrain.driveL(0);
     }
   }
+
   
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-  public void end(boolean interrupted) {}   // Called once the command ends or is interrupted.
+  public void end(boolean interrupted) {}  // Called once the command ends or is interrupted.
   
 
   // Returns true when the command should end.
