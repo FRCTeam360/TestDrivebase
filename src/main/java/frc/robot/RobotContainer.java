@@ -34,6 +34,8 @@ public class RobotContainer {
 
   private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive(drivetrain);
   private final XboxTankDrive xboxTankDrive = new XboxTankDrive(drivetrain);
+  private final ButtonDrive buttonDrive = new ButtonDrive(drivetrain);
+
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -41,7 +43,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    drivetrain.setDefaultCommand(xboxArcadeDrive);
+    drivetrain.setDefaultCommand(buttonDrive);
     // Configure the button bindings
     configureButtonBindings();
   }
