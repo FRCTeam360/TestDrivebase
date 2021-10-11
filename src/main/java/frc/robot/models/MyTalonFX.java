@@ -26,6 +26,12 @@ public class MyTalonFX extends TalonFX implements SpeedController {
         return myTalonFXSensors.getIntegratedSensorVelocity();
     }
 
+
+    public double getSelectedSensorPosition() {
+        // TODO Auto-generated method stub
+        return super.getSelectedSensorPosition();
+    }
+
     @Override
     public void pidWrite(double output) {
         this.currentSetValue = output;

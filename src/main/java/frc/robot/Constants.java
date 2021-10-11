@@ -28,10 +28,11 @@ public final class Constants {
         public static final double xboxDeadzone = .125;
     }
 
-    // public static final class AutoConstants {
-    //     //Conversions for the Falcons
-    //     private static final double pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
-    //     //public static final double ticksToMeters = ( ((15.0/85.0)*(30.0/40.0)) / 1.0 ) * ( (pi * .1524) / 1.0 ); 
-    //     public static final double ticksToMeters = ( ((15.0/85.0)*(30.0/40.0)) / 1.0 ) * ( (pi * .1524) / 1.0 );
-    // }
+    public static final class AutoConstants {
+        //Conversions for the Falcons
+        private static final double pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
+        //public static final double ticksToMeters = ( ((15.0/85.0)*(30.0/40.0)) / 1.0 ) * ( (pi * .1524) / 1.0 ); 
+        public static final double ticksToMeters = ( ((15.0/85.0)*(30.0/40.0)) / 1.0 ) * ( (pi * .1524) / 1.0 );
+        public static final boolean kGyroReversed = true; //Characterization says this isn't necessary but it seems to perform better....
+    }
 }
