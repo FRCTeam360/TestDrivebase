@@ -34,7 +34,7 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
     myDriveTrain.driveR(driverCont.getY(Hand.kRight));
-   
+    myDriveTrain.driveL(driverCont.getY(Hand.kLeft));
     }
   
 
