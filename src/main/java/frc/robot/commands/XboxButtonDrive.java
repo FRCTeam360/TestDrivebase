@@ -39,7 +39,7 @@ public class XboxButtonDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if((driverCont.getAButton()){
+    if(driverCont.getAButton()){
 
       myDriveTrain.driveL(.2);
       myDriveTrain.driveR(.2);
@@ -51,12 +51,13 @@ public class XboxButtonDrive extends CommandBase {
 
       myDriveTrain.driveR(-.2);
       myDriveTrain.driveL(-.2);
-    }
+    
       
     }else{
       myDriveTrain.driveR(0);
       myDriveTrain.driveL(0);
   }
+}
 
   // Called once the command ends or is interrupted.
   @Override
