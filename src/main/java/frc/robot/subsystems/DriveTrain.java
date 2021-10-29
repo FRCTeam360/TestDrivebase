@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
-import com.kauailabs.navx.frc.AHRS; //If error here check updates: install vendor online use: https://www.kauailabs.com/dist/frc/2021/navx_frc.json
+ //If error here check updates: install vendor online use: https://www.kauailabs.com/dist/frc/2021/navx_frc.json
 import edu.wpi.first.wpilibj.SPI; //Port NavX is on
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,8 +45,8 @@ public class DriveTrain extends SubsystemBase {
   private double leftNewPos;   // initializes new positions for left and right sides
   private double rightNewPos;
 
-  private AHRS navX;
-  private final DifferentialDriveOdometry m_odometry;
+ 
+  
   private final SpeedControllerGroup leftGroup;
   private final SpeedControllerGroup rightGroup;
 
@@ -80,8 +80,8 @@ public class DriveTrain extends SubsystemBase {
     motorRFollow1.setInverted(TalonFXInvertType.FollowMaster);
     motorRFollow2.setInverted(TalonFXInvertType.FollowMaster);
 
-    navX = new AHRS(SPI.Port.kMXP); //For frc-characterization tool: "SPI.Port.kMXP" of type "NavX"
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+     //For frc-characterization tool: "SPI.Port.kMXP" of type "NavX"
+   
 
     resetEncPos(); //Reset Encoders r navX yaw before m_odometry is defined
 
@@ -101,14 +101,13 @@ public class DriveTrain extends SubsystemBase {
   public void resetEncPos () { //For initialization resets encoder positions, for ramsete
     motorLLead.setSelectedSensorPosition(0);
     motorRLead.setSelectedSensorPosition(0);
-     navX.zeroYaw();
-     navX.setAngleAdjustment( -navX.getAngle() ); //Set angle offset
-     m_odometry.resetPosition(new Pose2d(), Rotation2d.fromDegrees(getHeading())); //Set odomentry to zero
+     
+     
   }
 
-  public double getHeading() {
-    return Math.IEEEremainder(navX.getAngle(), 360) * (AutoConstants.kGyroReversed ? -1.0 : 1.0);
-  }
+ 
+    
+  
 
   public void driveR (double Rmotor) {
     motorRLead.set( Rmotor );
@@ -140,8 +139,8 @@ public class DriveTrain extends SubsystemBase {
 
   public void navxTestingDashboardReadouts () {
     //SmartDashboard.putNumber("N ang", Math.IEEEremainder(navX.getAngle(), 360) );
-    SmartDashboard.putNumber("NAV ang", navX.getAngle() );
-    SmartDashboard.putString("Pos2D",  m_odometry.getPoseMeters().toString() );
+    
+   
     //SmartDashboard.putNumber("N pre", navX.getBarometricPressure()); //why this no work cri, just tryna get the pressure
     //SmartDashboard.putNumber("N yaw", navX.getYaw());
 
@@ -160,11 +159,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_odometry.update( //Must be in meters according to internets
-      Rotation2d.fromDegrees(getHeading()),
-      motorLLead.getSelectedSensorPosition() * AutoConstants.ticksToMeters,
-      motorRLead.getSelectedSensorPosition() * AutoConstants.ticksToMeters
-    );
+    
   }
 
 

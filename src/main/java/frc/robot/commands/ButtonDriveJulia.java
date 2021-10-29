@@ -6,26 +6,24 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.subsystems.DriveTrain;
-
 import static frc.robot.Constants.OIConstants.*;
+
 public class ButtonDriveJulia extends CommandBase {
   /** Creates a new ButtonDriveJulia. */
+
   private final DriveTrain myDriveTrain;
 
   private final XboxController driverCont;
-
-  public XboxTankDrive(DriveTrain driveTrain) {
-    driverCont = new XboxController(driverContPort);
-    myDriveTrain = driveTrain;
-    addRequirements(myDriveTrain);
-  }
-
-  public ButtonDriveJulia() {
+  public ButtonDriveJulia(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-  }
+    driverCont = new XboxController(driverContPort);
 
+    myDriveTrain = driveTrain;
+
+    addRequirements(myDriveTrain);  // Use addRequirements() here to declare subsystem dependencies.
+  }
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -42,7 +40,7 @@ public class ButtonDriveJulia extends CommandBase {
     }else{
       myDriveTrain.driveL(0);
       myDriveTrain.driveR(0);
-      
+
     }
   }
 

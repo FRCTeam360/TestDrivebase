@@ -31,8 +31,8 @@ public void initialize() {}
 
 @Override
 public void execute() {
-    myDriveTrain.driveL((driverCont.getY(Hand.kLeft)));
-    myDriveTrain.driveR((driverCont.getY(Hand.kRight)));    
+    myDriveTrain.driveL((-1 * driverCont.getY(Hand.kLeft)));
+    myDriveTrain.driveR((-1 * driverCont.getY(Hand.kRight)));    
 }
 
 @Override
