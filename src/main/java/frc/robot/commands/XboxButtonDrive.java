@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+
 import frc.robot.subsystems.DriveTrain;
 
 import static frc.robot.Constants.OIConstants.*;
@@ -43,11 +43,8 @@ public class XboxButtonDrive extends CommandBase {
 
       myDriveTrain.driveL(.2);
       myDriveTrain.driveR(.2);
-    }else{
-    	myDriveTrain.driveR(0);
-      myDriveTrain.driveL(0);
     }
-    if(driverCont.getBButton()){
+    else if(driverCont.getBButton()){
 
       myDriveTrain.driveR(-.2);
       myDriveTrain.driveL(-.2);
@@ -57,7 +54,7 @@ public class XboxButtonDrive extends CommandBase {
       myDriveTrain.driveR(0);
       myDriveTrain.driveL(0);
   }
-}
+}  
 
   // Called once the command ends or is interrupted.
   @Override
