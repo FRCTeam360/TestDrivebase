@@ -33,11 +33,14 @@ public void initialize() {}
 public void execute() {
     if(Math.abs(driverCont.getY(Hand.kRight)) >= xboxDeadzone ) {
         myDriveTrain.driveR((-1 * driverCont.getY(Hand.kRight))); 
-    } else if(Math.abs(driverCont.getY(Hand.kLeft)) >= xboxDeadzone ) {
+    }
+    if(Math.abs(driverCont.getY(Hand.kLeft)) >= xboxDeadzone ) {
         myDriveTrain.driveL((-1 * driverCont.getY(Hand.kLeft)));
-    } else if(Math.abs(driverCont.getY(Hand.kRight)) < xboxDeadzone ) {
+    } 
+    if(Math.abs(driverCont.getY(Hand.kRight)) < xboxDeadzone ) {
         myDriveTrain.driveR((0 * driverCont.getY(Hand.kRight)));
-    } else if(Math.abs(driverCont.getY(Hand.kLeft)) < xboxDeadzone ) {
+    }
+    if(Math.abs(driverCont.getY(Hand.kLeft)) < xboxDeadzone ) {
         myDriveTrain.driveL((0 * driverCont.getY(Hand.kLeft)));
     }
    
