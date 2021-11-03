@@ -110,6 +110,10 @@ public class DriveTrain extends SubsystemBase {
     return Math.IEEEremainder(navX.getAngle(), 360) * (AutoConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
+  public double getYaw() {
+    return navX.getYaw();
+  }
+
   public void driveR (double Rmotor) {
     motorRLead.set( Rmotor );
   }
@@ -142,8 +146,9 @@ public class DriveTrain extends SubsystemBase {
     //SmartDashboard.putNumber("N ang", Math.IEEEremainder(navX.getAngle(), 360) );
     SmartDashboard.putNumber("NAV ang", navX.getAngle() );
     SmartDashboard.putString("Pos2D",  m_odometry.getPoseMeters().toString() );
+    System.out.print("NavX angle: " + navX.getAngle());
     //SmartDashboard.putNumber("N pre", navX.getBarometricPressure()); //why this no work cri, just tryna get the pressure
-    //SmartDashboard.putNumber("N yaw", navX.getYaw());
+    SmartDashboard.putNumber("N yaw", navX.getYaw());
 
     //SmartDashboard.putBoolean("NAVC con", navX.isConnected());
     //SmartDashboard.putBoolean("NAV cal", navX.isCalibrating());

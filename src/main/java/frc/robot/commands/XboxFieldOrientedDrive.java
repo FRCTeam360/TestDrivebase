@@ -7,23 +7,28 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.subsystems.DriveTrain;
 
 import static frc.robot.Constants.OIConstants.*;
 
-public class XboxArcadeDrive extends CommandBase {
+import com.kauailabs.navx.frc.AHRS;
 
+
+public class XboxFieldOrientedDrive extends CommandBase {
+  
   private final DriveTrain myDriveTrain;
 
   private final XboxController driverCont;
 
-  /** Creates a new XboxArcadeDrive. */
-  public XboxArcadeDrive(DriveTrain driveTrain) {
+  /** Creates a new XboxFieldOrientedDrive. */
+  public XboxFieldOrientedDrive(DriveTrain driveTrain) {
     driverCont = new XboxController(driverContPort);
 
     myDriveTrain = driveTrain;
 
     addRequirements(myDriveTrain); // Use addRequirements() here to declare subsystem dependencies.
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -33,6 +38,9 @@ public class XboxArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    double gyroAngle = myDriveTrain.getYaw();
+
     double rightLeftSquared = 0;
     double upDownSquared = 0;
     double driveRight = 0;
@@ -52,10 +60,21 @@ public class XboxArcadeDrive extends CommandBase {
         upDownSquared = upDownSquared * -1;
       }
     }
-    
-    driveLeft = upDownSquared + rightLeftSquared;
-    driveRight = upDownSquared - rightLeftSquared;
 
+    
+
+    //field oriented drive conversion. forward = robot-based forward value, right = robot-based turning adjustment
+    double forward = upDownSquared * Math.cos(gyroAngle) + rightLeftSquared * Math.sin(gyroAngle);
+    double right = -1 * upDownSquared * Math.sin(gyroAngle) + rightLeftSquared * Math.cos(gyroAngle);
+
+    System.out.println("forward: " + forward);
+    System.out.println("right: " + right);
+
+    //sets drive values using previous values for right/left and forward/back
+    driveLeft = forward + right;
+    driveRight = forward - right;
+
+    //ensures motors are not passed value greater than 1 or less than -1
     driveLeft = Math.min(driveLeft, 1);
     driveRight = Math.min(driveRight, 1);
     driveLeft = Math.max(driveLeft, -1);
@@ -63,8 +82,14 @@ public class XboxArcadeDrive extends CommandBase {
  
     myDriveTrain.driveL(driveLeft * 1.0);
     myDriveTrain.driveR(driveRight * 1.0);
+    
+    // double contRadians = Math.atan2(driverCont.getY(Hand.kLeft), driverCont.getX(Hand.kRight)); //arctan of stick inputs for radians
+    // double lStickAngle = Math.toDegrees(contRadians); //radians to degrees 
+    
+    if(driverCont.getYButton()){
+      myDriveTrain.resetEncPos(); //reset angle when Y pressed
+    }
 
-    myDriveTrain.navxTestingDashboardReadouts();
   }
 
   // Called once the command ends or is interrupted.
