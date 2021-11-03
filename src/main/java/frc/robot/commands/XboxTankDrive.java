@@ -1,9 +1,6 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 
@@ -20,39 +17,44 @@ public class XboxTankDrive extends CommandBase {
 
   private final XboxController driverCont;
 
+  /** Creates a new XboxTankDrive. */
   public XboxTankDrive(DriveTrain driveTrain) {
+      driverCont = new XboxController(driverContPort);
 
-    driverCont = new XboxController(driverContPort);
+      myDriveTrain = driveTrain;
 
-    myDriveTrain = driveTrain;
-
-    addRequirements(myDriveTrain); // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(myDriveTrain);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
+  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {   // Called when the command is initially scheduled.
-  }
+  public void initialize() {}
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {   // Called every time the scheduler runs while the command is scheduled.
-    if(Math.abs(driverCont.getY(Hand.kRight)) >= .125){
-    	myDriveTrain.driveR(-1 * driverCont.getY(Hand.kRight) * 1.0);
-    }else{
-    	myDriveTrain.driveR(0);
+  public void execute() {
+    if(Math.abs(driverCont.getY(Hand.kRight)) > xboxDeadzone){
+        myDriveTrain.driveR(driverCont.getY(Hand.kRight) * -1);
+    }if(Math.abs(driverCont.getY(Hand.kLeft)) > xboxDeadzone){
+      myDriveTrain.driveL(driverCont.getY(Hand.kLeft) * -1);
     }
-    if(Math.abs(driverCont.getY(Hand.kLeft)) >= .125){
-      myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft) * 1.0);
-    }else{
-    	myDriveTrain.driveL(0);
+    else{
+      myDriveTrain.driveR(0);
+      myDriveTrain.driveL(0);
     }
-  }
+    
 
-  @Override
-  public void end(boolean interrupted) {   // Called once the command ends or is interrupted.
-  }
+}
 
+  
+  // Called once the command ends or is interrupted.
   @Override
-  public boolean isFinished() {  // Returns true when the command should end.
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
     return false;
   }
 }
