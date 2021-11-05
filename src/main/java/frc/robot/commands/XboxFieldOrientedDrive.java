@@ -40,6 +40,7 @@ public class XboxFieldOrientedDrive extends CommandBase {
   public void execute() {
 
     double gyroAngle = myDriveTrain.getYaw();
+    double gyroRadians = Math.toRadians(gyroAngle);
 
     double rightLeftSquared = 0;
     double upDownSquared = 0;
@@ -64,8 +65,8 @@ public class XboxFieldOrientedDrive extends CommandBase {
     
 
     //field oriented drive conversion. forward = robot-based forward value, right = robot-based turning adjustment
-    double forward = upDownSquared * Math.cos(gyroAngle) + rightLeftSquared * Math.sin(gyroAngle);
-    double right = -1 * upDownSquared * Math.sin(gyroAngle) + rightLeftSquared * Math.cos(gyroAngle);
+    double forward = upDownSquared * Math.cos(gyroRadians) + rightLeftSquared * Math.sin(gyroRadians);
+    double right = -1 * upDownSquared * Math.sin(gyroRadians) + rightLeftSquared * Math.cos(gyroRadians);
 
     System.out.println("forward: " + forward);
     System.out.println("right: " + right);
@@ -88,6 +89,15 @@ public class XboxFieldOrientedDrive extends CommandBase {
     
     if(driverCont.getYButton()){
       myDriveTrain.resetEncPos(); //reset angle when Y pressed
+    }
+
+    //_________rotation control_____________
+
+    //double rotationRight = -1 * driverCont.getY(Hand.kRight) * Math.sin(gyroRadians) + driverCont.getX(Hand.kRight) * Math.cos(gyroRadians);
+
+    if(Math.abs(driverCont.getX(Hand.kRight)) >= xboxDeadzone){
+      myDriveTrain.driveR(-1 * driverCont.getX(Hand.kRight));
+      myDriveTrain.driveL(driverCont.getX(Hand.kRight));
     }
 
   }

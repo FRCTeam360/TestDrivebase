@@ -170,6 +170,7 @@ public class DriveTrain extends SubsystemBase {
       motorLLead.getSelectedSensorPosition() * AutoConstants.ticksToMeters,
       motorRLead.getSelectedSensorPosition() * AutoConstants.ticksToMeters
     );
+    navxTestingDashboardReadouts();
   }
 
 
