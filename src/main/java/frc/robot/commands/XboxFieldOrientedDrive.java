@@ -7,12 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.subsystems.DriveTrain;
 
 import static frc.robot.Constants.OIConstants.*;
-
-import com.kauailabs.navx.frc.AHRS;
 
 
 public class XboxFieldOrientedDrive extends CommandBase {
@@ -68,8 +65,8 @@ public class XboxFieldOrientedDrive extends CommandBase {
     double forward = upDownSquared * Math.cos(gyroRadians) + rightLeftSquared * Math.sin(gyroRadians);
     double right = -1 * upDownSquared * Math.sin(gyroRadians) + rightLeftSquared * Math.cos(gyroRadians);
 
-    System.out.println("forward: " + forward);
-    System.out.println("right: " + right);
+    // System.out.println("forward: " + forward);
+    // System.out.println("right: " + right);
 
     //sets drive values using previous values for right/left and forward/back
     driveLeft = forward + right;
@@ -81,8 +78,14 @@ public class XboxFieldOrientedDrive extends CommandBase {
     driveLeft = Math.max(driveLeft, -1);
     driveRight = Math.max(driveRight, -1);
  
-    myDriveTrain.driveL(driveLeft * 1.0);
-    myDriveTrain.driveR(driveRight * 1.0);
+    //drive reversed if bumper held
+    if(driverCont.getBumper(Hand.kLeft)){
+      myDriveTrain.driveL(driveRight * 0.5);
+      myDriveTrain.driveR(driveLeft * 0.5);
+    }else{
+      myDriveTrain.driveL(driveLeft * 0.5);
+      myDriveTrain.driveR(driveRight * 0.5);
+    }
     
     // double contRadians = Math.atan2(driverCont.getY(Hand.kLeft), driverCont.getX(Hand.kRight)); //arctan of stick inputs for radians
     // double lStickAngle = Math.toDegrees(contRadians); //radians to degrees 
@@ -95,9 +98,10 @@ public class XboxFieldOrientedDrive extends CommandBase {
 
     //double rotationRight = -1 * driverCont.getY(Hand.kRight) * Math.sin(gyroRadians) + driverCont.getX(Hand.kRight) * Math.cos(gyroRadians);
 
+    //rotate based on right stick
     if(Math.abs(driverCont.getX(Hand.kRight)) >= xboxDeadzone){
-      myDriveTrain.driveR(-1 * driverCont.getX(Hand.kRight));
-      myDriveTrain.driveL(driverCont.getX(Hand.kRight));
+      myDriveTrain.driveR(-0.5 * driverCont.getX(Hand.kRight));
+      myDriveTrain.driveL(0.5 * driverCont.getX(Hand.kRight));
     }
 
   }
