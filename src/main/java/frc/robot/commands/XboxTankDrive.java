@@ -38,9 +38,15 @@ public class XboxTankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    myDriveTrain.driveL(driverCont.getY(Hand.kLeft));
-    myDriveTrain.driveR(driverCont.getY(Hand.kRight));
-  }
+    if(Math.abs(-1 *driverCont.getY(Hand.kLeft)) >= xboxDeadzone) {
+      myDriveTrain.driveL(driverCont.getY(Hand.kLeft))
+    }else{ myDriveTrain.driveL(0);}
+
+    if(Math.abs(-1 *driverCont.getY(Hand.kRight)) >= xboxDeadzone) {
+      myDriveTrain.driveR(driverCont.getY(Hand.kRight))
+    }else{ myDriveTrain.driveL(0);}
+    }
+    
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
