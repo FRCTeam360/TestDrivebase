@@ -42,7 +42,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    drivetrain.setDefaultCommand(xboxButtonDrive);
+    drivetrain.setDefaultCommand(xboxTankDrive);
     // Configure the button bindings
     configureButtonBindings();
   }
