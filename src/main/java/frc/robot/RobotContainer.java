@@ -32,7 +32,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   public final DriveTrain drivetrain = new DriveTrain();
 
-  private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive(drivetrain);
+  private final XboxArcadeDriveJulia XboxArcadeDriveJulia = new XboxArcadeDriveJulia(drivetrain);
   private final XboxTankDrive xboxTankDrive = new XboxTankDrive(drivetrain);
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -41,7 +41,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    drivetrain.setDefaultCommand(xboxTankDrive);
+    drivetrain.setDefaultCommand(XboxArcadeDriveJulia);
     // Configure the button bindings
     configureButtonBindings();
   }

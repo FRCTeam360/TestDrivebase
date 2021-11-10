@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -13,7 +12,7 @@ import frc.robot.subsystems.DriveTrain;
 
 import static frc.robot.Constants.OIConstants.*;
 /** Add your docs here. */
-public class XboxArcadeDriveJulia {
+public class XboxArcadeDriveJulia extends CommandBase {
     private final DriveTrain myDriveTrain;
 
     private final XboxController driverCont;
