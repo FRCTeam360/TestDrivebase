@@ -30,17 +30,16 @@ public void initialize() {}
 
 @Override
 public void execute() {
-    myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft));
-    myDriveTrain.driveR(-1 * driverCont.getY(Hand.kLeft));
-
     if(driverCont.getX(Hand.kLeft) > 0) {
         myDriveTrain.driveR(-1 * driverCont.getX(Hand.kLeft));
         myDriveTrain.driveL(0);
     
-    }
-    if(driverCont.getX(Hand.kLeft) < 0 ) {
+    }else if(driverCont.getX(Hand.kLeft) < 0 ) {
         myDriveTrain.driveL(-1 * driverCont.getX(Hand.kLeft));
         myDriveTrain.driveR(0);
+    }else {
+        myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft));
+        myDriveTrain.driveR(-1 * driverCont.getY(Hand.kLeft));
     }
 }
 @Override
