@@ -39,12 +39,12 @@ public class XboxTankDrive extends CommandBase {
   @Override
   public void execute() {
     if(Math.abs(-1 *driverCont.getY(Hand.kLeft)) >= xboxDeadzone) {
-      myDriveTrain.driveL(driverCont.getY(Hand.kLeft))
+      myDriveTrain.driveL(driverCont.getY(Hand.kLeft));
     }else{ myDriveTrain.driveL(0);}
 
     if(Math.abs(-1 *driverCont.getY(Hand.kRight)) >= xboxDeadzone) {
-      myDriveTrain.driveR(driverCont.getY(Hand.kRight))
-    }else{ myDriveTrain.driveL(0);}
+      myDriveTrain.driveR(driverCont.getY(Hand.kRight));
+    }else{ myDriveTrain.driveR(0);}
     }
     
   // Called once the command ends or is interrupted.
