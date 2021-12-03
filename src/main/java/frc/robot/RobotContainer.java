@@ -6,9 +6,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+//import frc.robot.commands.ExampleCommand;
+//import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+
+//import frc.robot.Constants.OIConstants;
+import frc.robot.commands.*;
+// import frc.robot.commands.autoCommands.*;
+import frc.robot.subsystems.*;
+
+// import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+// import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+
+// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -17,13 +30,19 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  public final DriveTrain drivetrain = new DriveTrain();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final XboxArcadeDrive xboxArcadeDrive = new XboxArcadeDrive(drivetrain);
+  //private final XboxTankDrive xboxTankDrive = new XboxTankDrive(drivetrain);
+  private final XboxFieldOrientedDrive xboxFieldOrientedDrive = new XboxFieldOrientedDrive(drivetrain);
+  // The robot's subsystems and commands are defined here...
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    drivetrain.setDefaultCommand(xboxFieldOrientedDrive);
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -43,6 +62,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
