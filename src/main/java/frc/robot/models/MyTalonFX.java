@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 /** Add your docs here. */
 public class MyTalonFX extends TalonFX implements SpeedController {
-    private int defaultPidIndex = 0;
+    //private int defaultPidIndex = 0;
     private double currentSetValue = 0;
     private TalonFXSensorCollection myTalonFXSensors;
     

@@ -10,11 +10,11 @@ import static frc.robot.Constants.DriveTrainConstants.*;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
-import static frc.robot.Constants.DriveTrainConstants.*;
+//import static frc.robot.Constants.DriveTrainConstants.*;
 import frc.robot.Constants.AutoConstants;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+//import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -40,10 +40,10 @@ public class DriveTrain extends SubsystemBase {
 
   private final DifferentialDrive m_differentialDrive;
 
-  private double leftVel;   // initializes velocities for left and right sides
-  private double rightVel;
-  private double leftNewPos;   // initializes new positions for left and right sides
-  private double rightNewPos;
+  //private double leftVel;   // initializes velocities for left and right sides
+  //private double rightVel;
+  //private double leftNewPos;   // initializes new positions for left and right sides
+  //private double rightNewPos;
 
   private AHRS navX;
   private final DifferentialDriveOdometry m_odometry;
