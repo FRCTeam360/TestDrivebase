@@ -24,23 +24,21 @@ public class XboxArcadeDriveJulia extends CommandBase {
         myDriveTrain = driveTrain;
 
         addRequirements(myDriveTrain);
+
+        double rightLeftSquared = 0;
+        double upDownSquared = 0;
+        double driveRight = 0;
+        double driveLeft = 0;
     }
 @Override
 public void initialize() {}
 
 @Override
 public void execute() {
-    if(driverCont.getX(Hand.kLeft) > 0) {
-        myDriveTrain.driveR(-1 * driverCont.getX(Hand.kLeft));
-        myDriveTrain.driveL(0);
-    
-    }else if(driverCont.getX(Hand.kLeft) < 0 ) {
-        myDriveTrain.driveL(-1 * driverCont.getX(Hand.kLeft));
-        myDriveTrain.driveR(0);
-    }else {
-        myDriveTrain.driveL(-1 * driverCont.getY(Hand.kLeft));
-        myDriveTrain.driveR(-1 * driverCont.getY(Hand.kLeft));
-    }
+    myDriveTrain.driveR((-1*driverCont.getY(Hand.kLeft)));
+    myDriveTrain.driveL((-1*driverCont.getY(Hand.kLeft)));
+    myDriveTrain.driveR((-1*driverCont.getX(Hand.kLeft)));
+    myDriveTrain.driveL((-1*driverCont.getX(Hand.kLeft)));
 }
 @Override
 public void end(boolean interrupted) {}
