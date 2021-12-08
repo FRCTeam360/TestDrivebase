@@ -34,12 +34,12 @@ public void initialize() {}
 
 @Override
 public void execute() {
-    if( driverCont.getY(Hand.kLeft) < 0) {
-        myDriveTrain.driveR(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
-    myDriveTrain.driveL(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
-    } else {
+    if(driverCont.getY(Hand.kLeft) > 0) {
         myDriveTrain.driveR(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft)+(driverCont.getX(Hand.kLeft))));
-    myDriveTrain.driveL(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft)+(driverCont.getX(Hand.kLeft))));
+        myDriveTrain.driveL(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft)+(driverCont.getX(Hand.kLeft))));
+    } if(driverCont.getY(Hand.kLeft) < 0) {
+        myDriveTrain.driveR(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
+        myDriveTrain.driveL(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
     }
 
 }
