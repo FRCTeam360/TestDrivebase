@@ -44,15 +44,15 @@ public void execute() {
     if(driverCont.getX(Hand.kLeft) < 0) {
         leftRightSquared = -1*leftRightSquared;
     }
-    double driveLeft = upDownSquared + leftRightSquared;
-    double driveRight = upDownSquared - leftRightSquared;
+    double driveLeft = upDownSquared - leftRightSquared;
+    double driveRight = upDownSquared + leftRightSquared;
     driveLeft = Math.min(driveLeft, 1);
     driveLeft = Math.max(driveLeft, -1);
     driveRight = Math.min(driveRight, 1);
     driveRight = Math.max(driveRight, -1);
 
-    myDriveTrain.driveL(driveLeft);
-    myDriveTrain.driveR(driveRight);
+    myDriveTrain.driveL(-1*driveLeft);
+    myDriveTrain.driveR(-1*driveRight);
 
 
 }
