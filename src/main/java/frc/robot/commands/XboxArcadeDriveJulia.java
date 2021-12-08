@@ -25,22 +25,35 @@ public class XboxArcadeDriveJulia extends CommandBase {
 
         addRequirements(myDriveTrain);
 
-        double upDownSquared; 
-        upDownSquared = 0;
-
     }
 @Override
 public void initialize() {}
 
 @Override
 public void execute() {
-    if(driverCont.getY(Hand.kLeft) > 0) {
-        myDriveTrain.driveR(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft)+(driverCont.getX(Hand.kLeft))));
-        myDriveTrain.driveL(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft)+(driverCont.getX(Hand.kLeft))));
-    } if(driverCont.getY(Hand.kLeft) < 0) {
-        myDriveTrain.driveR(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
-        myDriveTrain.driveL(-1*(driverCont.getY(Hand.kLeft)*(driverCont.getY(Hand.kLeft))+(driverCont.getX(Hand.kLeft))));
+   
+    double upDownSquared; 
+    upDownSquared = driverCont.getY(Hand.kLeft)*driverCont.getY(Hand.kLeft);
+    double leftRightSquared;
+    leftRightSquared = driverCont.getX(Hand.kLeft)*driverCont.getX(Hand.kLeft);
+    
+    if(driverCont.getY(Hand.kLeft) < 0) {
+
+        upDownSquared = -1*upDownSquared;
+    } 
+    if(driverCont.getX(Hand.kLeft) < 0) {
+        leftRightSquared = -1*leftRightSquared;
     }
+    double driveLeft = upDownSquared + leftRightSquared;
+    double driveRight = upDownSquared - leftRightSquared;
+    driveLeft = Math.min(driveLeft, 1);
+    driveLeft = Math.max(driveLeft, -1);
+    driveRight = Math.min(driveRight, 1);
+    driveRight = Math.max(driveRight, -1);
+
+    myDriveTrain.driveL(driveLeft);
+    myDriveTrain.driveR(driveRight);
+
 
 }
     
