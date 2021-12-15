@@ -1,9 +1,6 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 
@@ -15,45 +12,52 @@ import frc.robot.subsystems.DriveTrain;
 import static frc.robot.Constants.OIConstants.*;
 
 public class XboxArcadeDrive extends CommandBase {
- 
+
   private final DriveTrain myDriveTrain;
 
   private final XboxController driverCont;
 
+  /** Creates a new XboxArcadeDrive. */
   public XboxArcadeDrive(DriveTrain driveTrain) {
-    
     driverCont = new XboxController(driverContPort);
-  
+
     myDriveTrain = driveTrain;
 
-    addRequirements(myDriveTrain);
+    addRequirements(myDriveTrain); // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  //double rightLeftSquared = 0;
-  //double upDownSquared = 0;
-  double driveRight = 0;
-  double driveLeft = 0;
+    double rightLeftSquared = driverCont.getX(Hand.kLeft)*driverCont.getX(Hand.kLeft);
+    double upDownSquared = driverCont.getY(Hand.kLeft)*driverCont.getY(Hand.kLeft);
+    
+    if(driverCont.getX(Hand.kLeft) < 0){
+        rightLeftSquared = rightLeftSquared*(-1);
+      }
+    
+    if(driverCont.getY(Hand.kLeft) < 0){
+        upDownSquared = upDownSquared*(-1);
+      }
+    double L = upDownSquared - rightLeftSquared;
+    double R = upDownSquared + rightLeftSquared;
+     
+    Math.max(upDownSquared, -1);
+    Math.min(upDownSquared, 1);
+    Math.max(rightLeftSquared, -1);
+    Math.min(rightLeftSquared, 1);
 
-  if(Math.abs(-1*driverCont.getY(Hand.kLeft)) >= xboxDeadzone) {
-    myDriveTrain.driveL(driverCont.getY(Hand.kLeft));
-    myDriveTrain.driveR(driverCont.getY(Hand.kLeft));
-  }else{myDriveTrain.driveR(0);
-        myDriveTrain.driveL(0);
-  }
-  }
-
+    myDriveTrain.driveR(R*-1);
+    myDriveTrain.driveL(L*-1);
+    }
+  
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
